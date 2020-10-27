@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}All Groups{% endblock title %}
+{% block content %}
+{% for allgroups in object_list %}
+<div class="card">
+<div class="card-header">
+<span class="font-weight-bold">{{ allgroups.title }}</span> &middot;
+<span class="text-muted">by {{ allgroups.author }} |
+{{ allgroups.date }}</span>
+</div>
+<div class="card=body">
+{{ allgroups.body }}
+</div>
+<div class="card-footer text-center text-muted">
+<a href="{% url 'allgroups_edit' allgroups.pk %}">Edit</a> |
+<a href="{% url 'allgroups_delete' allgroups.pk %}">Delete</a>
+</div>
+</div>
+<br />
+{% endfor %}
+{% endblock content %}
