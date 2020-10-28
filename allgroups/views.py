@@ -4,15 +4,13 @@ from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Allgroups
 
-class AllgroupsListView(LoginRequiredMixin, ListView):
+class AllgroupsListView(ListView):
     model = Allgroups
     template_name = 'allgroups_list.html'
-    login_url = 'login'
 
-class AllgroupsDetailView(LoginRequiredMixin, DetailView):
+class AllgroupsDetailView(DetailView):
     model = Allgroups
     template_name = 'allgroups_detail.html'
-    login_url = 'login'
 
 class AllgroupsUpdateView(LoginRequiredMixin, UpdateView):
     model = Allgroups
