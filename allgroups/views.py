@@ -24,4 +24,8 @@ class AllgroupsDeleteView(DeleteView):
 class AllgroupsCreateView(CreateView):
     model = Allgroups
     template_name = 'allgroups_new.html'
-    fields = ('title', 'body', 'author',)
+    fields = ('title', 'body')
+
+    def for_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
