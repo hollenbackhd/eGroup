@@ -1,4 +1,7 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import(
+    LoginRequiredMixin,
+    UserPassesTestMixin
+    )
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
@@ -12,17 +15,25 @@ class AllgroupsDetailView(DetailView):
     model = Allgroups
     template_name = 'allgroups_detail.html'
 
-class AllgroupsUpdateView(LoginRequiredMixin, UpdateView):
+class AllgroupsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Allgroups
     fields = ('title', 'body',)
     template_name = 'allgroups_edit.html'
     login_url = 'login'
 
-class AllgroupsDeleteView(LoginRequiredMixin, DeleteView):
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
+
+class AllgroupsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Allgroups
     template_name = 'allgroups_delete.html'
     success_url = reverse_lazy('allgroups_list')
     login_url = 'login'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
 
 class AllgroupsCreateView(LoginRequiredMixin, CreateView):
     model = Allgroups
