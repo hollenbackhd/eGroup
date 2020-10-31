@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import mygroupsView
+from . import views
 
 urlpatterns = [
-    path('', mygroupsView, name='mygroups')
-
+    path('', views.index, name='index'),
     ]
