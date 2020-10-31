@@ -1,6 +1,10 @@
-from django.urls import path
-from .views import MygroupsDetailView
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('<int:pk>/', MygroupsDetailView.as_view(), name='mygroups_detail'),
+    path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
+    path('users/', include('django.contrib.auth.urls')),
+    path('allgroups/', include('allgroups.urls')),
+    path('', include('pages.urls')),
     ]
