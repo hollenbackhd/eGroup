@@ -12,6 +12,21 @@ div {text-align: left;}
 <body>
 <h1>My groups</h1>
 <p>Created groups</p>
+
+
+{% for allgroups in object_list %}
+<div class="card">
+<div class="card-header">
+<span class = "font-weight-bold">{{ allgroups.title }}</span> &middot;
+<span class="text-muted">by {{ allgroups.author }} |
+{{ allgroups.date }}</span>
+</div>
+<div class="card=body">
+<p>{{ allgroups.body }}</p>
+
+{% endfor %}
+
+
 <div>Here will be the users created groups</div>
 <p>Involved groups</p>
 <div>Here will be the users involved groups(groups that the user doesn't own)</div>
