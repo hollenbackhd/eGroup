@@ -12,5 +12,6 @@ urlpatterns = [
     path('<int:pk>/', AllgroupsDetailView.as_view(), name='allgroups_detail'),
     path('<int:pk>/delete/', AllgroupsDeleteView.as_view(), name='allgroups_delete'),
     path('new/', AllgroupsCreateView.as_view(), name='allgroups_new'),
-    path('', AllgroupsListView.as_view(), name='allgroups_list'),
+    path('mygroups/',  name='mygroups_page'),
+    path('', AllgroupsCreateView.as_view(), name='allgroups_list'),
     ]

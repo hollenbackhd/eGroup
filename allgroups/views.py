@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import(
     LoginRequiredMixin,
     UserPassesTestMixin
     )
+from django.views import View
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
@@ -38,6 +39,16 @@ class AllgroupsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class AllgroupsCreateView(LoginRequiredMixin, CreateView):
     model = Allgroups
     template_name = 'allgroups_new.html'
+    fields = ('title', 'body')
+    login_url = 'login'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class MygroupsView(LoginRequiredMixin, View):
+    model = Allgroups
+    template_name = 'mygroups_page.html'
     fields = ('title', 'body')
     login_url = 'login'
 
