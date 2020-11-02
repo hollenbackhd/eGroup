@@ -23,9 +23,6 @@
 <li class="nav-item"><a href="{% url 'allgroups_new' %}">+ New</a></li>
 </ul>
 
-</ul class="navbar-nav mr-auto">
-<li class="nav-item"><a href="{% url 'mygroups_page' %}>My Groups</a></li>
-</ul>
 
 {% endif %}
       <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -49,6 +46,9 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'logout' %}">
               Log Out</a>
+
+		<a class="dropdown-item" href="{ url 'mygroups_page' %}">My Groups</a>
+
             </div>
           </li>
         </ul>
