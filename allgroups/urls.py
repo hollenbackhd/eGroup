@@ -5,7 +5,7 @@ from .views import (
     AllgroupsDetailView,
     AllgroupsDeleteView,
     AllgroupsCreateView,
-    AllgroupsTestView,
+    AllgroupsMygroupsView,
     )
 
 urlpatterns = [
@@ -13,6 +13,6 @@ urlpatterns = [
     path('<int:pk>/', AllgroupsDetailView.as_view(), name='allgroups_detail'),
     path('<int:pk>/delete/', AllgroupsDeleteView.as_view(), name='allgroups_delete'),
     path('new/', AllgroupsCreateView.as_view(), name='allgroups_new'),
-    path('test/', AllgroupsTestView.as_view(), name='allgroups_test'),
+    path('mygroups/', AllgroupsMygroupsView.as_view(), name='allgroups_mygroups'),
     path('', AllgroupsListView.as_view(), name='allgroups_list'),
     ]

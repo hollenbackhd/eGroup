@@ -48,9 +48,9 @@ class AllgroupsCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class AllgroupsTestView(LoginRequiredMixin, CreateView):
+class AllgroupsMygroupsView(LoginRequiredMixin, CreateView):
     model = Allgroups
-    template_name = 'allgroups_test.html'
+    template_name = 'allgroups_mygroups.html'
     fields = ('title','body')
     login_url = 'login'
 
