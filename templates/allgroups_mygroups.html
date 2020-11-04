@@ -2,7 +2,9 @@
 
 {% block content %}
 <h1>My Groups</h1>
-<p>Hi</p>
+
+<hr size = "20">
+<p style="font-size:25px; color:Blue;">Created Groups</p>
 
 {% for allgroups in object_list %}
 
@@ -16,6 +18,12 @@
 
 {% endif %}
 {% endfor %}
+
+<hr>
+<p style="font-size:25px; color:Green;">Involved Groups</p>
+
+<hr>
+<p style="font-size:25px; color:Red;">Pending Groups</p>
 
 
 
