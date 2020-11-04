@@ -27,6 +27,16 @@ class AllgroupsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         obj = self.get_object()
         return obj.author == self.request.user
 
+class AllgroupsRequestView(LoginRequiredMixin, CreateView):
+    model = Allgroups
+    fields = ('title', 'body')
+    template_name = 'allgroups_request.html'
+    login_url = 'login'
+
+    def test_func(self):
+        ob = self.get_object()
+        return obj.author == self.request.user
+
 class AllgroupsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Allgroups
     template_name = 'allgroups_delete.html'

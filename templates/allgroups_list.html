@@ -13,7 +13,8 @@
 <p>{{ allgroups.body }}</p>
 
 <a href="{% url 'allgroups_edit' allgroups.pk %}">Edit</a> |
-<a href="{% url 'allgroups_delete' allgroups.pk %}">Delete</a>
+<a href="{% url 'allgroups_delete' allgroups.pk %}">Delete</a> |
+<a href="{% url 'allgroups_request' allgroups.pk %}">Join</a>
 </div>
 <div class="card-footer">
 {% for comment in allgroups.comments.all %}
