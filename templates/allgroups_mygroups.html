@@ -21,6 +21,17 @@
 
 <hr>
 <p style="font-size:25px; color:Green;">Involved Groups</p>
+{% for allgroups in object_list %}
+{% if allgroups.request == True %}
+<div class="card">
+<div class="card-header">
+<span class = "font-weight-bold">{{ allgroups.title }}</span> & middot;
+</div>
+<div class="card=body">
+<p>{{ allgroups.body }}</p>
+
+{% endif %}
+{% endfor %}
 
 <hr>
 <p style="font-size:25px; color:Red;">Pending Groups</p>
