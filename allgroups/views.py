@@ -27,14 +27,15 @@ class AllgroupsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         obj = self.get_object()
         return obj.author == self.request.user
 
-class AllgroupsRequestView(LoginRequiredMixin, DeleteView):
+class AllgroupsRequestView(LoginRequiredMixin, UpdateView):
     model = Allgroups
-    fields = ('title', 'body')
+    fields = ('request',)
     template_name = 'allgroups_request.html'
     success_url = reverse_lazy('allgroups_list')
     login_url = 'login'
 
     def test_func(self):
+        request = True
         ob = self.get_object()
         return obj.author == self.request.user
 

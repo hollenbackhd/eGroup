@@ -3,7 +3,9 @@
 {% block content %}
 <h1>Join</h1>
 <form action="" method="post">{% csrf_token %}
+{{ form.as_p }}
 <p>Do you want to join "{{ allgroups.title }}"?</p>
-<button type="button" class="btn btn-success">Confirm</button>
+<button class="btn btn-success" type="submit">Confirm</button>
+
 </form>
 {% endblock content %}
