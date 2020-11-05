@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 {% block title %}All Groups{% endblock title %}
 {% block content %}
+
 {% for allgroups in object_list %}
 <div class="card">
 <div class="card-header">
@@ -14,9 +15,15 @@
 
 <a href="{% url 'allgroups_edit' allgroups.pk %}">Edit</a> |
 <a href="{% url 'allgroups_delete' allgroups.pk %}">Delete</a> |
-<a href="{% url 'allgroups_request' allgroups.pk %}">Join</a>
+
+{% if allgroups.private == False %}
+<a href="{% url 'allgroups_request' allgroups.pk %}">Public - Request</a>
+{% elif allgroups.private == True %}
+<a href="{% url 'allgroups_request' allgroups.pk %}">Private - Request</a>
+{% endif %}
 </div>
 <div class="card-footer">
+
 {% for comment in allgroups.comments.all %}
 <p>
 <span class="font-weight-bold">{{ comment.author }} &middot;</span>

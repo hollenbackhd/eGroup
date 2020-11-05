@@ -19,7 +19,7 @@ class AllgroupsDetailView(DetailView):
 
 class AllgroupsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Allgroups
-    fields = ('title', 'body',)
+    fields = ('title', 'body','private')
     template_name = 'allgroups_edit.html'
     login_url = 'login'
 
@@ -52,7 +52,7 @@ class AllgroupsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class AllgroupsCreateView(LoginRequiredMixin, CreateView):
     model = Allgroups
     template_name = 'allgroups_new.html'
-    fields = ('title', 'body')
+    fields = ('title', 'body','private')
     login_url = 'login'
 
     def form_valid(self, form):
@@ -63,7 +63,7 @@ class AllgroupsCreateView(LoginRequiredMixin, CreateView):
 class AllgroupsMygroupsView(LoginRequiredMixin, ListView):
     model = Allgroups
     template_name = 'allgroups_mygroups.html'
-    fields = ('title','body')
+    fields = ('title','body','private')
     login_url = 'login'
 
     def form_valid(self, form):
