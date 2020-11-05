@@ -63,7 +63,7 @@ class AllgroupsCreateView(LoginRequiredMixin, CreateView):
 class AllgroupsMygroupsView(LoginRequiredMixin, ListView):
     model = Allgroups
     template_name = 'allgroups_mygroups.html'
-    fields = ('title','body','private')
+    fields = ('title','body','private','request')
     login_url = 'login'
 
     def form_valid(self, form):
