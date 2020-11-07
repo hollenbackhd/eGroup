@@ -69,3 +69,13 @@ class AllgroupsMygroupsView(LoginRequiredMixin, ListView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+class AllgroupsSelectgroupView(LoginRequiredMixin, ListView):
+    model = Allgroups
+    template_name = 'allgroups_selectgroup.html'
+    fields = ('title','body','private','request')
+    login_url = 'login'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
