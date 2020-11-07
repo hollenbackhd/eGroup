@@ -7,8 +7,14 @@
 <div class="card">
 <div class="card-header">
 <span class="font-weight-bold">{{ allgroups.title }}</span> &middot;
-<span class="text-muted">by {{ allgroups.author }} |
-{{ allgroups.date }}</span>
+<span class="text-muted">by {{ allgroups.author }} | </span>
+{{ allgroups.date }} | 
+{% if allgroups.private == False %}
+<span class="text-muted">Public</span>
+{% elif allgroups.private == True %}
+<span class="text-muted">Private</span>
+{% endif %}
+
 </div>
 <div class="card=body">
 <p>{{ allgroups.body }}</p>
