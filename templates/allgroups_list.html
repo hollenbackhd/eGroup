@@ -22,11 +22,7 @@
 <a href="{% url 'allgroups_edit' allgroups.pk %}">Edit</a> |
 <a href="{% url 'allgroups_delete' allgroups.pk %}">Delete</a> |
 
-{% if allgroups.private == False %}
-<a href="{% url 'allgroups_request' allgroups.pk %}">Public - Request</a>
-{% elif allgroups.private == True %}
-<a href="{% url 'allgroups_request' allgroups.pk %}">Private - Request</a>
-{% endif %}
+
 </div>
 <div class="card-footer">
 

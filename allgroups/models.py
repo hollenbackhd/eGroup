@@ -7,7 +7,6 @@ class Allgroups(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    request = models.BooleanField(default=False)
     private = models.BooleanField(default=False)
     author = models.ForeignKey(
         get_user_model(),
