@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -8,10 +9,12 @@ class Allgroups(models.Model):
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     private = models.BooleanField(default=False)
+    discussion = models.CharField(max_length=255)
     author = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
         )
+    userlist = models.ManyToManyField('allgroups.getUser', related_name= 'userlist')
 
     def __str__(self):
         return self.title
@@ -37,3 +40,11 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return reverse('allgroups_list')
+
+class getUser(models.Model):
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        )
+
+

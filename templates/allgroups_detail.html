@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class ="allgroups-entry">
-<h2>{{ object.title }}</h2>
+<h2><a href="{% url 'allgroups_group' allgroups.pk %}">{{ allgroups.title }}</a></h2>
 <p>by {{ object.author }} | {{ object.date}}</p>
 <p>{{ object.body }}</p>
 </div>

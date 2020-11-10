@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% block title %}All Groups{% endblock title %}
 {% block content %}
@@ -6,7 +5,7 @@
 {% for allgroups in object_list %}
 <div class="card">
 <div class="card-header">
-<a href="{% url 'allgroups_selectgroup' allgroups.pk %}">{{ allgroups.title }}</a> &middot;
+<a href="{% url 'allgroups_group' allgroups.pk %}">{{ allgroups.title }}</a> &middot;
 <span class="text-muted">by {{ allgroups.author }} | </span>
 {{ allgroups.date }} | 
 {% if allgroups.private == False %}

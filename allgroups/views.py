@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import(
     LoginRequiredMixin,
     UserPassesTestMixin
     )
+from django.db import models
+from django.db.models import Model
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
@@ -70,12 +72,9 @@ class AllgroupsMygroupsView(LoginRequiredMixin, ListView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class AllgroupsSelectgroupView(LoginRequiredMixin, ListView):
+class AllgroupsGroupView(DetailView):
     model = Allgroups
-    template_name = 'allgroups_selectgroup.html'
-    fields = ('title','body','private','request')
-    login_url = 'login'
+    template_name = 'allgroups_group.html'
+    success_url = reverse_lazy('article_list')
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+

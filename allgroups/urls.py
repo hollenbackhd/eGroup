@@ -7,7 +7,7 @@ from .views import (
     AllgroupsCreateView,
     AllgroupsMygroupsView,
     AllgroupsRequestView,
-    AllgroupsSelectgroupView,
+    AllgroupsGroupView,
     )
 
 urlpatterns = [
@@ -18,5 +18,6 @@ urlpatterns = [
     path('new/', AllgroupsCreateView.as_view(), name='allgroups_new'),
     path('mygroups/', AllgroupsMygroupsView.as_view(), name='allgroups_mygroups'),
     path('', AllgroupsListView.as_view(), name='allgroups_list'),
-    path('<int:pk>/title/', AllgroupsSelectgroupView.as_view(), name='allgroups_selectgroup'),
+    path('<int:pk>/group/', AllgroupsGroupView.as_view(), name='allgroups_group'),
+
     ]

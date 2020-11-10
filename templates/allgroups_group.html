@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Group</h1>
+<form action="" method="post">{% csrf_token %}
+<p>Are you sure you want to delete "{{ allgroups.title }}"?</p>
+<p>{{ allgroups.body }}</p>
+
+</form>
+{% endblock content %}
