@@ -3,6 +3,9 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+from django.contrib import admin
+from django.db.models import CharField, Model
+from django_mysql.models import ListCharField
 
 class Allgroups(models.Model):
     title = models.CharField(max_length=255)
@@ -14,7 +17,7 @@ class Allgroups(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
         )
-    userlist = models.ManyToManyField('allgroups.getUser', related_name= 'userlist')
+
 
     def __str__(self):
         return self.title
@@ -46,5 +49,22 @@ class getUser(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
         )
+
+class userList(models.Model):
+    allgroups = models.ForeignKey(
+        Allgroups,
+        on_delete=models.CASCADE,
+        related_name = 'userList',
+        )
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        )
+
+    def __str__(self):
+        return str(self.user)
+
+    def get_absolute_url(self):
+        return reverse('allgroups_list')
 
 
