@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>New Group</h1>
+<script>
+function addUser(){
+allgroups.userlist.Allgroups.title.add(title)
+allgroups.userlist.Allgroups.body.add(body)
+allgroups.userlist.Allgroups.private.add(private)
+allgroups.userlist.Allgroups.user.add(user)
+allgroups.userlist.user.add(user)
+}
+</script>
+
+<form action="" method="post">{% csrf_token %}
+{{ form.as_p }}
+<button onclick="addUser();"></button>
+</form>
+{% endblock content %}

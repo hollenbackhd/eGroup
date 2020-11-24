@@ -7,6 +7,8 @@ from .views import (
     AllgroupsCreateView,
     AllgroupsMygroupsView,
     userlistUpdateView,
+    NewListUpdateView,
+    userlistRemoveUserView,
 
     AllgroupsGroupView,
     )
@@ -20,5 +22,7 @@ urlpatterns = [
     path('', AllgroupsListView.as_view(), name='allgroups_list'),
     path('<int:pk>/group/', AllgroupsGroupView.as_view(), name='allgroups_group'),
     path('<int:pk>/update/', userlistUpdateView.as_view(), name='userlist_update'),
+    path('<int:pk>/confirm/', NewListUpdateView.as_view(), name='userlist_newlist'),
+    path('<int:pk>/removeuser/', userlistRemoveUserView.as_view(), name='userlist_removeuser'),
 
     ]

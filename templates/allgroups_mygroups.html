@@ -1,54 +1,84 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>My Groups</h1>
+<body style ="background-color:peachpuff;">
+
+<div class="card">
+<div class="card-header">
+<h1 style = "text-align: center; font-size:40px; font-family:Times; color:black;">My Groups</h1>
+</div>
+</div>
+<p></p>
+<p></p>
 
 <hr size = "20">
-<p style="font-size:25px; color:Blue;">Created Groups</p>
+<p style="font-family:Times; font-size:25px; color:darkslategray;">Created Groups</p>
 
 {% for allgroups in object_list %}
 
 {% if allgroups.author == user %}
 <div class="card">
 <div class="card-header">
-<span class = "font-weight-bold">{{ allgroups.title }}</span>
+<a href="{% url 'allgroups_group' allgroups.pk %}">{{ allgroups.title }}</a>
 </div>
 <div class="card=body">
 <p>{{ allgroups.body }}</p>
+<a href="{% url 'allgroups_edit' allgroups.pk %}">Edit</a> |
+<a href="{% url 'allgroups_delete' allgroups.pk %}">Delete</a> |
+</div>
+</div>
 {% endif %}
+{% endfor %}
+
+
+
+
+
+<hr size = "20">
+<p style="font-family:Times; font-size:25px; color:darkslategray;">Involved Groups</p>
+
+{% for allgroups in object_list %}
+
+{% for users in allgroups.userList.all %}
+{% if users.user == user and allgroups.author != user and allgroups.private == False %}
+<div class="card">
+<div class="card-header">
+
+<a href="{% url 'allgroups_group' allgroups.pk %}">{{ allgroups.title }}</a>
+</div>
+<div class="card=body">
+<p>{{ allgroups.body }}</p>
+<a href="{% url 'userlist_removeuser' allgroups.pk %}">(-)Unjoin</a>
+
+</div>
+</div>
+{% endif %}
+{% endfor %}
 {% endfor %}
 
 
 <hr size = "20">
-<br><br>
-<p style="font-size:25px; color:Green;">Involved Groups</p>
+<p style="font-family:Times; font-size:25px; color:darkslategray;">Pending Groups</p>
+
 {% for allgroups in object_list %}
-{% if allgroups.request == True %}
+
+{% for users in allgroups.userList.all %}
+{% if users.user == user and allgroups.author != user and allgroups.private == True %}
 <div class="card">
 <div class="card-header">
-<span class = "font-weight-bold">{{ allgroups.title }}</span>
+
+<a href="{% url 'allgroups_detail' allgroups.pk %}">{{ allgroups.title }}</a>
 </div>
 <div class="card=body">
 <p>{{ allgroups.body }}</p>
-{% endif %}
-{% endfor %}
+<a href="{% url 'userlist_removeuser' allgroups.pk %}">(-)Unjoin</a>
 
-
-<hr>
-<br><br>
-<p style="font-size:25px; color:Red;">Pending Groups</p>
-
-{% for allgroups in object_list %}
-{% if allgroups.private == True and allgroups.request == True %}
-<div class="card">
-<div class="card-header">
-<span class = "font-weight-bold">{{ allgroups.title }}</span>
 </div>
-<div class="card=body">
-<p>{{ allgroups.body }}</p>
+</div>
 {% endif %}
+{% endfor %}
 {% endfor %}
 
 
-
+</body>
 {% endblock content %}

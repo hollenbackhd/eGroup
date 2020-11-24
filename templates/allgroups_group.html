@@ -1,10 +1,124 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Group</h1>
-<form action="" method="post">{% csrf_token %}
-<p>Are you sure you want to delete "{{ allgroups.title }}"?</p>
-<p>{{ allgroups.body }}</p>
+<body style ="background-color:peachpuff;">
+<div class="card">
+<div class="card-header">
+<div class ="allgroups-entry">
 
+<h1 style="font-family:Times; font-size:40px; color:darkslategray;">{{ allgroups.title}}</h1>
+<p>by {{ object.author }} | {{ object.date}} |
+{% for users in allgroups.userList.all %}
+{% if forloop.last %}
+User Count: {{ forloop.counter }}  </p>
+{% endif %}
+{% empty %}
+User Count: 0 </p>
+
+{% endfor %}
+
+
+
+
+<p>{{ object.body }}</p>
+</div>
+{% if user == allgroups.author %}
+<p><a href="{% url 'allgroups_edit' allgroups.pk %}">Edit</a> |
+<a href="{% url 'allgroups_delete' allgroups.pk %}">Delete</a>|
+{% endif %}
+
+
+
+
+<p></p>
+</div>
+</div>
+<p></p>
+<p></p>
+
+<div class="card">
+<div class="card-header">
+<div class ="allgroups-entry">
+<h1 style="font-family:Times; font-size:20px; color:darkslategray;">
+Current Users:</h1>
+{% for users in allgroups.userList.all %}
+<p>{{ users.user }}
+{% endfor %}
+<p></p>
+</div>
+</div>
+</div>
+<p></p>
+
+
+
+
+<div class="card">
+<div class="card-footer">
+<h1 style="font-family:Times; font-size:20px; color:darkslategray;">General Comments:</h1>
+{% for comment in allgroups.comments.all %}
+<p>
+<span class="font-weight-bold">{{ comment.author }} &middot;</span>
+{{ comment }}
+</p>
+
+{% endfor %}
+<p></p>
+</div>
+</div>
+<p></p>
+
+
+{% with comments1.count as total_comments %}
+
+<div class="card">
+<div class="card-header">
+<h1 style="font-family:Times; font-size:20px; color:darkslategray;">{{ total_comments }} Comments:{{ total_comments|pluralize }}</h1>
+
+
+{% endwith %}
+
+
+
+
+{% for comment1 in comments1 %}
+<h1 style="font-family:Times; font-size:20px; color:darkslategray;">Comments:</h1>
+<div class ="comment1"
+<p class="info">
+Comments: {{ forloop.counter }} by {{ comment1.name }}
+{{ comment1.created }}
+</p>
+{{ comment1.body|linebreaks }}
+</div>
+{% empty %}
+<p>There are no comments yet.</p>
+<p></p>
+{% endfor %}
+<p></p>
+{% if new_comment %}
+<h2>Your comment has been added.</h2>
+{% else %}
+<h1 style="font-family:Times; font-size:20px; color:darkslategray;">Add a new comment...later:</h1>
+
+<form action="." method="allgroups">
+{{ comment_form.as_p }}
+{% csrf_token %}
+<p><input type="submit" value="Add comment"></p>
 </form>
+
+{% endif %}
+
+</div>
+</div>
+
+
+
+
+<p></p>
+<a class="btn btn-primary btn-sm" href="{% url 'allgroups_list' %}"
+role="button">All Groups</a>
+<a class="btn btn-primary btn-sm" href="{% url 'allgroups_mygroups' %}"
+role="button">My Groups</a>
+
+</body>
 {% endblock content %}

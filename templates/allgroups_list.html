@@ -1,40 +1,112 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block title %}All Groups{% endblock title %}
 {% block content %}
+{% load define_action %}
 
+<div class="card">
+<div class="card-header">
+<h1 style = "text-align: center; font-size:40px; font-family:Times; color:black;">All Groups</h1>
+</div>
+</div>
+<p></p>
+<p></p>
+
+<body style="background-color:peachpuff;">
 {% for allgroups in object_list %}
 <div class="card">
 <div class="card-header">
+
+
+{% for users in allgroups.userList.all %}
+{% if users.user == user %}
 <a href="{% url 'allgroups_group' allgroups.pk %}">{{ allgroups.title }}</a> &middot;
+{% elif users.user != user %}
+<a href="{% url 'allgroups_detail' allgroups.pk %}">{{ allgroups.title }}</a> &middot;
+{% endif %}
+{% empty %}
+<a href="{% url 'allgroups_detail' allgroups.pk %}">{{ allgroups.title }}</a> &middot;
+{% endfor %}
+
+
 <span class="text-muted">by {{ allgroups.author }} | </span>
 {{ allgroups.date }} | 
 {% if allgroups.private == False %}
-<span class="text-muted">Public</span>
+<span class="text-muted">Public |</span>
 {% elif allgroups.private == True %}
-<span class="text-muted">Private</span>
+<span class="text-muted">Private |</span>
 {% endif %}
+
+{% for users in allgroups.userList.all %}
+{% if forloop.last %}
+<span class="text-muted">User Count: {{ forloop.counter }}  </span>
+{% endif %}
+{% empty %}
+<span class="text-muted">User Count: 0 </span>
+
+{% endfor %}
+
 
 </div>
 <div class="card=body">
 <p>{{ allgroups.body }}</p>
 
+{% if allgroups.author == user %}
 <a href="{% url 'allgroups_edit' allgroups.pk %}">Edit</a> |
 <a href="{% url 'allgroups_delete' allgroups.pk %}">Delete</a> |
-<a href="{% url 'userlist_update' allgroups.pk %}">Join</a> |
+{% endif %}
 
 
 
-</div>
-<div class="card-footer">
+{% for users in allgroups.userList.all %}
 
-{% for comment in allgroups.comments.all %}
-<p>
-<span class="font-weight-bold">{{ comment.author }} &middot;</span>
-{{ comment }}
-</p>
+{% if allgroups.author != user %}
+{% if users.user == user %}
+<a class="btn btn-primary btn-sm" href="{% url 'userlist_removeuser' allgroups.pk %}"
+role="button">(-)Unjoin</a>
+{% define "True" as action %}
+{% elif action != "True" and forloop.last %}
+<a class="btn btn-primary btn-sm" href="{% url 'userlist_update' allgroups.pk %}"
+role="button">(+)Join</a>
+
+
+
+{% endif %}
+{% endif %}
+
 {% endfor %}
+
+
+
+{% for users in allgroups.userList.all %}
+{% empty %}
+
+{% define "True" as action %}
+
+{% if allgroups.author != user and action == "True" %}
+<a class="btn btn-primary btn-sm" href="{% url 'userlist_update' allgroups.pk %}"
+role="button">(+)Join</a>
+{% endif %}
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
+
+
+
+
 </div>
 <br />
 {% endfor %}
+</body>
 {% endblock content %}

@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Delete</h1>
+<body style="background-color:peachpuff;">
+<div class="card">
+<div class="card-header">
+<h1 style = "font-family:Times; font-size:40px; color:darkslategray;">Delete</h1>
 <form action="" method="post">{% csrf_token %}
+
 <p>Are you sure you want to delete "{{ allgroups.title }}"?</p>
+<p></p>
+</div>
+</div>
+<p></p>
 <button class="btn btn-danger ml-2" type="submit">Confirm</button>
 </form>
+</body>
 {% endblock content %}
